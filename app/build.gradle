@@ -1,0 +1,40 @@
+apply plugin: 'com.android.model.application'
+
+model {
+    android {
+        compileSdkVersion = 25
+        buildToolsVersion ="25.0.3"
+        defaultConfig {
+            applicationId "bolex.com.androidjna"
+            minSdkVersion.apiLevel 19
+            targetSdkVersion.apiLevel 25
+            versionCode 4
+            versionName "1.0.1"
+        }
+    }
+    android.ndk {
+        moduleName "lavor"
+        ldLibs.addAll(['log'])
+        cppFlags.add("-std=c++11")
+        cppFlags.add("-fexceptions")
+        platformVersion 15
+        stl 'gnustl_shared'
+    }
+    android.buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles.add(file("proguard-rules.txt"))
+        }
+    }
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile group: 'com.sun.jna', name: 'jna', version: '3.0.9'
+}
+
+
+
